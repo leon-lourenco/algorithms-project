@@ -6,18 +6,16 @@
 
 **Leer en:** [English](README.md) | [Português](README.pt-BR.md) | [Español](README.es.md)
 
-Un proyecto Java modular que demuestra los algoritmos clásicos enseñados en un curso
-universitario de Ciencias de la Computación — un módulo Gradle por algoritmo, cada uno con su
-propio README, una implementación desde cero, una segunda implementación que aplica ese
-algoritmo a un escenario real, y un microbenchmark JMH que convierte la afirmación de
+Un proyecto Java modular que cubre los algoritmos clásicos enseñados en un curso universitario de
+Ciencias de la Computación — ordenamiento, búsqueda, programación dinámica, estrategias voraces,
+coincidencia de patrones, teoría de números y backtracking. Un módulo Gradle por algoritmo, cada
+uno con su propio README, una implementación desde cero, una segunda implementación que aplica
+ese algoritmo a un escenario real, y un microbenchmark JMH que convierte la afirmación de
 complejidad (Big-O) del libro de texto en un número medido y reproducible. Todo es JVM puro: sin
 demo alojada, sin servicios externos, `./gradlew build` y listo.
 
 Este es un proyecto de portafolio de [Leon Lourenço](https://github.com/leon-lourenco),
-ingeniero backend sénior, construido en público en lotes acotados — el proyecto hermano de
-[The Grand Data Structures Project](https://github.com/leon-lourenco/data-structures-project).
-Los algoritmos de grafos (BFS/DFS, Dijkstra, Union-Find, MST de Kruskal) viven allá, junto a la
-estructura de grafo sobre la que operan, en lugar de duplicarse aquí.
+ingeniero backend sénior.
 
 ## Algunos números reales
 
@@ -34,6 +32,15 @@ ver el README de cada módulo para la tabla completa y cómo reproducirla.
 - **[Merge Sort](sorting/merge-sort)** y **[Heap Sort](sorting/heap-sort)** se mantienen ambos
   dentro de ~1,3–2x entre sí en entrada ya ordenada, casi ordenada y aleatoria, en todo tamaño —
   la afirmación de "límite garantizado sin importar el orden de entrada", hecha medible.
+- **[Binary Search](searching/binary-search)** frente a **[Linear Search](searching/linear-search)**
+  sobre el mismo array de 1.000.000 de elementos: **~55.353x más rápido** para la misma pregunta
+  de "¿está ahí?" — todo el valor de asumir datos ordenados, hecho medible.
+- **[Fibonacci](dynamic-programming/fibonacci)** en n=35: la recursión ingenua es **~6.057.544x
+  más lenta** que la versión tabulada para exactamente la misma respuesta — exponencial vs.
+  espacio O(1), hecho medible.
+- **[N-Queens](backtracking/n-queens)** con 8 reinas: el backtracking con poda es **~940x más
+  rápido** que la fuerza bruta, y ambos coinciden en la misma respuesta — las famosas **92**
+  soluciones publicadas por primera vez en 1850.
 
 ## Por qué classic + applied + benchmark
 
@@ -82,8 +89,8 @@ vs. O(n²)) *a través* de la JVM, no alrededor de ella.
 
 ## Los algoritmos
 
-**Fase 1 — Ordenamiento** (completa): implementación classic/applied/benchmark, README propio, y
-cobertura genuina del 100% de instrucciones + ramas en JaCoCo para cada módulo de abajo.
+Cada módulo de abajo lleva la misma implementación classic/applied/benchmark, su propio README, y
+cobertura genuina del 100% de instrucciones + ramas en JaCoCo.
 
 | Algoritmo | Categoría | Escenario aplicado |
 |-----------|----------|-------------------|
@@ -92,13 +99,18 @@ cobertura genuina del 100% de instrucciones + ramas en JaCoCo para cada módulo 
 | [Merge Sort](sorting/merge-sort) | Ordenamiento | Ordenamiento de informe de compliance de fraude (plataforma antifraude) |
 | [Quick Sort](sorting/quick-sort) | Ordenamiento | Ordenamiento de percentil de reserva de siniestros (aseguradora) |
 | [Heap Sort](sorting/heap-sort) | Ordenamiento | Ordenamiento de alarmas en equipo de borde (telecom) |
-
-**Planeado a continuación**: Búsqueda (búsqueda lineal/binaria), Programación Dinámica
-(Fibonacci, Knapsack 0/1, Longest Common Subsequence), Voraz (Coin Change, Codificación de
-Huffman), Coincidencia de Patrones (Knuth-Morris-Pratt), Matemáticas (MCD de Euclides, Criba de
-Eratóstenes, exponenciación rápida), y Backtracking (N-Queens + un ejemplo aplicado de
-asignación de frecuencias en telecom) — el mismo tratamiento classic/applied/benchmark, agregado
-incrementalmente en lotes acotados.
+| [Linear Search](searching/linear-search) | Búsqueda | Detector de llamadas con exceso de franquicia (telecom) |
+| [Binary Search](searching/binary-search) | Búsqueda | Consulta de snapshot de claves PIX (PIX/BACEN) |
+| [Fibonacci](dynamic-programming/fibonacci) | Programación Dinámica | Conteo de rutas de pago entre bancos corresponsales (telecom) |
+| [0/1 Knapsack](dynamic-programming/knapsack) | Programación Dinámica | Selección de proyectos de capex (telecom) |
+| [Longest Common Subsequence](dynamic-programming/longest-common-subsequence) | Programación Dinámica | Diff de conciliación de libro mayor bancario (banco legado) |
+| [Coin Change](greedy/coin-change) | Voraz | Entrega de billetes en retiro de cajero automático (banco legado) |
+| [Huffman Coding](greedy/huffman-coding) | Voraz | Compresión de lotes de CDR (telecom) |
+| [Knuth-Morris-Pratt](string-matching/knuth-morris-pratt) | Coincidencia de Patrones | Escaneo de narración en lista de vigilancia (plataforma antifraude) |
+| [Euclidean GCD](math/euclidean-gcd) | Matemáticas | Reducción de proporción de split payment (PIX/BACEN) |
+| [Sieve of Eratosthenes](math/sieve-of-eratosthenes) | Matemáticas | Dimensionamiento de caché de deduplicación (plataforma antifraude) |
+| [Fast Exponentiation](math/fast-exponentiation) | Matemáticas | Proyección de crecimiento de reserva actuarial (aseguradora) |
+| [N-Queens](backtracking/n-queens) | Backtracking | Asignación de carriles de liquidación (PIX/BACEN) |
 
 ## Estructura
 
@@ -156,11 +168,10 @@ referencia:
 - Skiena — *The Algorithm Design Manual* — fuerte en "cuándo usar qué" y estudios de caso
   reales, el mismo espíritu de las secciones "Cuándo no usarlo" de este repositorio.
 - Knuth — *The Art of Computer Programming*, Vol. 3 (Sorting and Searching) — la fuente
-  histórica y canónica para los algoritmos de ordenamiento de la primera fase de este
-  repositorio.
+  histórica y canónica para los módulos de ordenamiento y búsqueda de este repositorio.
 - Kleinberg & Tardos — *Algorithm Design* — una referencia fuerte específicamente para los
-  paradigmas de diseño voraz y programación dinámica que las próximas fases de este repositorio
-  cubrirán.
+  paradigmas de diseño voraz y programación dinámica cubiertos en los módulos de este
+  repositorio.
 
 ## Licencia
 

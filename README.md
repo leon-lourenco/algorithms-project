@@ -6,18 +6,16 @@
 
 **Read this in:** [English](README.md) | [Português](README.pt-BR.md) | [Español](README.es.md)
 
-A modular Java project demonstrating the classic algorithms taught in a university CS
-curriculum — one Gradle module per algorithm, each with its own README, a from-scratch
-implementation, a second implementation applying that algorithm to a real scenario, and a JMH
-microbenchmark that turns the textbook Big-O claim into a measured, reproducible number.
-Everything is plain JVM: no hosted demo, no external services, `./gradlew build` and you're
-done.
+A modular Java project covering the classic algorithms taught across a university CS
+curriculum — sorting, searching, dynamic programming, greedy strategies, string matching, number
+theory, and backtracking. One Gradle module per algorithm, each with its own README, a
+from-scratch implementation, a second implementation applying that algorithm to a real scenario,
+and a JMH microbenchmark that turns the textbook Big-O claim into a measured, reproducible
+number. Everything is plain JVM: no hosted demo, no external services, `./gradlew build` and
+you're done.
 
 This is a portfolio project by [Leon Lourenço](https://github.com/leon-lourenco), a senior
-backend engineer, built in public in scoped batches — the sibling project to
-[The Grand Data Structures Project](https://github.com/leon-lourenco/data-structures-project).
-Graph algorithms (BFS/DFS, Dijkstra, Union-Find, Kruskal's MST) live over there, colocated with
-the graph structure they operate on, rather than duplicated here.
+backend engineer.
 
 ## A few real numbers
 
@@ -34,6 +32,15 @@ own README for the full table and how to reproduce it.
 - **[Merge Sort](sorting/merge-sort)** and **[Heap Sort](sorting/heap-sort)** both stay within
   ~1.3–2x of each other across already-sorted, nearly-sorted, and random input at every size —
   the "guaranteed bound regardless of input order" claim, made measurable.
+- **[Binary Search](searching/binary-search)** against **[Linear Search](searching/linear-search)**
+  on the same 1,000,000-element array: **~55,353x faster** for the identical "is it there"
+  question — the entire value of a sorted-data assumption, made measurable.
+- **[Fibonacci](dynamic-programming/fibonacci)** at n=35: naive recursion is **~6,057,544x
+  slower** than the tabulated version for the exact same answer — exponential vs. O(1) space,
+  made measurable.
+- **[N-Queens](backtracking/n-queens)** at 8 queens: pruned backtracking is **~940x faster** than
+  brute force, and both agree on the same answer — the famous **92** solutions first published in
+  1850.
 
 ## Why classic + applied + benchmark
 
@@ -80,8 +87,8 @@ that layer is invisible; it leans on JMH's methodology specifically to see the a
 
 ## The algorithms
 
-**Phase 1 — Sorting** (complete): classic/applied/benchmark implementation, its own README, and
-genuine 100% JaCoCo instruction + branch coverage for every module below.
+Every module below carries the same classic/applied/benchmark implementation, its own README,
+and genuine 100% JaCoCo instruction + branch coverage.
 
 | Algorithm | Category | Applied scenario |
 |-----------|----------|-------------------|
@@ -90,12 +97,18 @@ genuine 100% JaCoCo instruction + branch coverage for every module below.
 | [Merge Sort](sorting/merge-sort) | Sorting | Fraud compliance report ordering (fraud platform) |
 | [Quick Sort](sorting/quick-sort) | Sorting | Claim reserve percentile sort (insurer) |
 | [Heap Sort](sorting/heap-sort) | Sorting | Edge-equipment alarm sort (telecom) |
-
-**Planned next**: Searching (linear/binary search), Dynamic Programming (Fibonacci, 0/1
-Knapsack, Longest Common Subsequence), Greedy (Coin Change, Huffman Coding), String Matching
-(Knuth-Morris-Pratt), Math (Euclid's GCD, Sieve of Eratosthenes, fast exponentiation), and
-Backtracking (N-Queens + a telecom frequency-assignment applied example) — same
-classic/applied/benchmark treatment, added incrementally in scoped batches.
+| [Linear Search](searching/linear-search) | Searching | Call-overage alert finder (telecom) |
+| [Binary Search](searching/binary-search) | Searching | PIX-key snapshot lookup (PIX/BACEN) |
+| [Fibonacci](dynamic-programming/fibonacci) | Dynamic Programming | Correspondent-bank payment route counting (telecom) |
+| [0/1 Knapsack](dynamic-programming/knapsack) | Dynamic Programming | Capex project selection (telecom) |
+| [Longest Common Subsequence](dynamic-programming/longest-common-subsequence) | Dynamic Programming | Bank ledger reconciliation diff (legacy bank) |
+| [Coin Change](greedy/coin-change) | Greedy | ATM cash-out note dispensing (legacy bank) |
+| [Huffman Coding](greedy/huffman-coding) | Greedy | CDR batch compression (telecom) |
+| [Knuth-Morris-Pratt](string-matching/knuth-morris-pratt) | String Matching | Watchlist narration scanning (fraud platform) |
+| [Euclidean GCD](math/euclidean-gcd) | Math | Split-payment ratio reduction (PIX/BACEN) |
+| [Sieve of Eratosthenes](math/sieve-of-eratosthenes) | Math | Dedup cache bucket sizing (fraud platform) |
+| [Fast Exponentiation](math/fast-exponentiation) | Math | Actuarial reserve growth projection (insurer) |
+| [N-Queens](backtracking/n-queens) | Backtracking | Settlement lane assignment (PIX/BACEN) |
 
 ## Structure
 
@@ -150,9 +163,9 @@ Books cited throughout this repo's individual module READMEs, gathered here for 
 - Skiena — *The Algorithm Design Manual* — strong on "when to use what" and real case studies,
   the same spirit as this repo's own "When not to use it" sections.
 - Knuth — *The Art of Computer Programming*, Vol. 3 (Sorting and Searching) — the historical,
-  canonical source for the sorting algorithms in this repo's first phase.
+  canonical source for this repo's sorting and searching modules.
 - Kleinberg & Tardos — *Algorithm Design* — a strong reference specifically for the greedy and
-  dynamic-programming design paradigms this repo's later phases will cover.
+  dynamic-programming design paradigms this repo's later modules cover.
 
 ## License
 
